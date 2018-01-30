@@ -20,7 +20,8 @@ export class TeamDetailPage {
     console.log('ionViewDidLoad TeamDetailPage');
   }
   goHome(){
-    this.navCtrl.push(MyTeamsPage);
+    // this.navCtrl.push(MyTeamsPage);
+    this.navCtrl.popToRoot();
   }
 
 }
