@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MyTeamsPage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,9 @@ export class TeamDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamDetailPage');
+  }
+  goHome(){
+    this.navCtrl.push(MyTeamsPage);
   }
 
 }
