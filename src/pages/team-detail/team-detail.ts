@@ -21,7 +21,9 @@ export class TeamDetailPage {
   }
   goHome(){
     // this.navCtrl.push(MyTeamsPage);
-    this.navCtrl.popToRoot();
+    // this.navCtrl.popToRoot();
+    console.log('**navCtrl-Parent',this.navCtrl.parent);
+    this.navCtrl.parent.parent.popToRoot();
   }
 
 }
