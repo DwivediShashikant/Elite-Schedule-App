@@ -8,7 +8,9 @@ import {
    MyTeamsPage,
    TeamDetailPage,
    TeamsPage,
-   TournamentsPage
+   TournamentsPage,
+   TeamHomePage,
+   StandingsPage
  } from '../pages/pages'
 import { MyApp } from './app.component';
 
@@ -19,7 +21,9 @@ import { MyApp } from './app.component';
     MyTeamsPage,
     TeamDetailPage,
     TeamsPage,
-    TournamentsPage
+    TournamentsPage,
+    TeamHomePage,
+    StandingsPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { MyApp } from './app.component';
     MyTeamsPage,
     TeamDetailPage,
     TeamsPage,
-    TournamentsPage
+    TournamentsPage,
+    TeamHomePage,
+    StandingsPage
   ],
   providers: [
     StatusBar,
