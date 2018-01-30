@@ -18,7 +18,25 @@ export class TeamsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TeamsPage');
+    console.log('Ionic View Did Load Teams page');
+  }
+  ionViewWillEnter(){
+    console.log(`##LifeCycle Events## ionViewWillEnter`);
+  }
+  ionViewDidEnter(){
+    console.log(`##LifeCycle Events## ionViewDidEnter`);
+  }
+  ionViewWillLeave(){
+    console.log(`##LifeCycle Events## ionViewWillLeave`);
+  }
+  ionViewDidLeave(){
+    console.log(`##LifeCycle Events## ionViewDidLeave`);
+  }
+  ionViewWillUnload(){
+    console.log(`##LifeCycle Events## ionViewWillUnload`);
+  }
+  ionViewDidUnload(){
+    console.log(`##LifeCycle Events## ionViewDidUnload`);
   }
 
   itemTapped(team){
