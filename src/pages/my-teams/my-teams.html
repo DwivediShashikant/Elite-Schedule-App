@@ -17,7 +17,9 @@
   <ion-list>
     <button ion-button (click) = 'tapped()'> Go To Tournaments</button>
     <button ion-item *ngFor = 'let f of favourites' (click) = 'favTapped(f)'>
+      <ion-icon name = 'star'></ion-icon>
       {{f.team.name}}
+      <p>{{f.tournamentName}}</p>
       </button>
   </ion-list>
   <p> To Follow more teams, select a Tournament, find teams in tournaments and select Favourites</p>
