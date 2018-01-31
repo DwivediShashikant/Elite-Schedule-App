@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <!-- <button ion-button (click) = 'goHome()'>Home</button> -->
-  <button ion-item *ngFor = 'let game of games'>
+  <button ion-item *ngFor = 'let game of games' (click) = 'itemTapped(game)'>
     {{game.opponent}}
   </button>
 </ion-content>

@@ -13,5 +13,12 @@
 
 
 <ion-content padding>
-  <button ion-button (click) = 'tapped()'>Find A Tournament</button>
+
+  <ion-list>
+    <button ion-button (click) = 'tapped()'> Go To Tournaments</button>
+    <button ion-item *ngFor = 'let f of favourites' (click) = 'favTapped(f)'>
+      {{f.team.name}}
+      </button>
+  </ion-list>
+  <p> To Follow more teams, select a Tournament, find teams in tournaments and select Favourites</p>
 </ion-content>

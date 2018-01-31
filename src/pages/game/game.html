@@ -8,5 +8,14 @@
 
 
 <ion-content padding>
+  <ion-item>3
+    <h2>Home Team</h2>
+    <button ion-button *ngIf = 'game' (click) = 'teamTapped(game.team1Id)'>{{game.team1}}</button>
+  </ion-item>
+
+  <ion-item>
+    <h2>Away Team</h2>
+    <button ion-button *ngIf = 'game' (click) = 'teamTapped(game.team2Id)'>{{game.team2}}</button>
+  </ion-item>
 
 </ion-content>

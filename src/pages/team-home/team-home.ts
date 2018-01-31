@@ -15,7 +15,6 @@ export class TeamHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.team = navParams.data;
-    console.log(this.team);
   }
 
   ionViewDidLoad() {
@@ -23,7 +22,6 @@ export class TeamHomePage {
   }
 
   goHome(){
-    // this.navCtrl.push(MyTeamsPage);
     this.navCtrl.popToRoot();
   }
 
