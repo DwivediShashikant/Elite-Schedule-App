@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { TeamsPage, TournamentsPage, TeamHomePage } from '../pages';
-import { EliteApiService } from '../../shared/shared'
+import { TournamentsPage, TeamHomePage } from '../pages';
+import { EliteApiService, UserSettignsService } from '../../shared/shared'
 
 @IonicPage()
 @Component({
@@ -10,23 +10,13 @@ import { EliteApiService } from '../../shared/shared'
 })
 export class MyTeamsPage {
 
-  favourites = [
-    {
-      team : { id: 812, name : 'Baltimore Stars', coach :'James'},
-      tournamentId : '3dd50aaf-6b03-4497-b074-d81703f07ee8',
-      tournamentName : 'Cager Classic'
-    },
-    {
-      team : { id: 844, name : 'Sharks', coach :'Smith'},
-      tournamentId : '46ebd526-8839-476a-9ba0-8a9b2c07f3c3',
-      tournamentName : 'Cager Classic'
-    }
-  ]
+  favourites = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams, 
     private _eliteApi : EliteApiService, 
-    private _loadingController: LoadingController) {
+    private _loadingController: LoadingController, 
+    private _userSetting : UserSettignsService) {
   }
 
   tapped(){
@@ -43,5 +33,13 @@ export class MyTeamsPage {
     loader.present();
     this._eliteApi.getTournamentTeamsById(favourite.tournamentId)
     .subscribe( t=> this.navCtrl.push(TeamHomePage,favourite.team));
+  }
+
+  ionViewDidEnter(){
+    let favourite = this._userSetting.getAllFavourites();
+    console.log(favourite);
+    for(let i=0;i<favourite.length - 6;i++){
+      this.favourites.push(JSON.parse(favourite[i]));
+    }
   }
 }

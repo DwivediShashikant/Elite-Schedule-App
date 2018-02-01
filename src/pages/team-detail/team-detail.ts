@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { MyTeamsPage, GamePage } from '../pages';
 import * as _ from 'lodash'
 import * as moment from 'moment'
-import { EliteApiService } from '../../shared/shared';
+import { EliteApiService, UserSettignsService } from '../../shared/shared';
 import { duration } from 'moment';
 
 @IonicPage()
@@ -27,7 +27,8 @@ export class TeamDetailPage {
     public navParams: NavParams, 
     private _eliteApi : EliteApiService, 
     private _alertController : AlertController, 
-    private _toast : ToastController ) {
+    private _toast : ToastController, 
+    private _userSettings : UserSettignsService ) {
 
     this.team = this.navParams.data;
     console.log(`**Nav-Params`);
@@ -57,6 +58,7 @@ export class TeamDetailPage {
                  .value();
       
       this.allGames = this.games;
+      this._userSettings.isFavouriteTeam(this.team).then( value => this.isFavourite = value);
       // this.teamStanding = _.find(this.tourneyData.standings, {'teamId' : this.team.id });
       console.log('**team standings',this.teamStanding);
     
@@ -114,6 +116,8 @@ export class TeamDetailPage {
           text : 'yes',
           handler : () => {
             // TODO on yes
+            this._userSettings.unFavouriteTeam(this.team);
+
             let toast = this._toast.create({
               message : 'Successfully Unfollwed',
               duration : 2000,
@@ -125,12 +129,18 @@ export class TeamDetailPage {
           text : 'no',
           handler : () => {
             this.isFavourite = true;
-            //TODO on no
           }
         }
         ]
       });
       alert.present();
+    }
+    else{
+      this.isFavourite = true;
+      this._userSettings.favouriteTeam(
+        this.team, 
+        this.tourneyData.tournament.id, 
+        this.tourneyData.tournament.name);
     }
   }
 }

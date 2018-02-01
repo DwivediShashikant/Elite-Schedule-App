@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EliteApiService } from '../shared/shared'
+import { EliteApiService, UserSettignsService } from '../shared/shared'
 import {
    GamePage,
    MyTeamsPage,
@@ -15,6 +15,7 @@ import {
  } from '../pages/pages'
 import { MyApp } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import {IonicStorageModule} from '@ionic/storage'
 
 @NgModule({
   declarations: [
@@ -31,6 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    IonicStorageModule.forRoot({
+      name : '__mydb',
+      driverOrder :['localstorage']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +52,9 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    EliteApiService
+    EliteApiService,
+    UserSettignsService,
+    Storage
   ]
 })
 export class AppModule {}
