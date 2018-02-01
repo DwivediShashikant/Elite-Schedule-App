@@ -5,7 +5,7 @@ import { EliteApiService } from '../../shared/shared'
 
 @IonicPage()
 @Component({
-  selector: 'page-my-teams',
+  selector: 'pageMyTeams',
   templateUrl: 'my-teams.html',
 })
 export class MyTeamsPage {

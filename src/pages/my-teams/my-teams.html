@@ -12,15 +12,40 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-list >
-    <button ion-item *ngFor = 'let f of favourites' (click) = 'favTapped(f)'>
-      <ion-icon name = 'star'></ion-icon>
-      {{f.team.name}}
-      <p>{{f.tournamentName}}</p>
-      </button>
-  </ion-list>
-  <p> To Follow more teams, select a Tournament, find teams in tournaments and select Favourites</p>
-  <button ion-button full (click) = 'tapped()'> Go To Tournaments</button>
+  <ion-card *ngIf ='!favourites'>
+
+    <ion-card-header class =''>No Followed Team</ion-card-header>
+
+    <ion-card-content>
+      <p>You are not following any teams currently.</p>
+      <p>Go to tournaments and select the team from there as your favourite team.</p>
+    </ion-card-content>
+
+    <button ion-button full (click) = 'tapped()' icon-left>
+        <ion-icon name = 'search'></ion-icon>
+        Go To Tournaments
+    </button>
+
+  </ion-card>
+
+  <ion-card *ngIf ='favourites'>
+    <ion-card-header class = 'follwedTeamHeader'>Followed Team</ion-card-header>
+    <ion-card-content>
+      <ion-list >
+         <button ion-item *ngFor = 'let f of favourites' (click) = 'favTapped(f)'>
+           <ion-icon name = 'star-outline'></ion-icon>
+           {{f.team.name}}
+           <p>{{f.tournamentName}}</p>
+         </button>
+      </ion-list>
+      <p> To Follow more teams, select a Tournament, find teams in tournaments and select Favourites</p>
+
+       <button ion-button full (click) = 'tapped()' icon-left>
+          <ion-icon name = 'search'></ion-icon>
+          Go To Tournaments
+       </button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

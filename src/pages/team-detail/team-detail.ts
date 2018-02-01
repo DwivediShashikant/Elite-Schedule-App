@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MyTeamsPage, GamePage } from '../pages';
 import * as _ from 'lodash'
+import * as moment from 'moment'
 import { EliteApiService } from '../../shared/shared';
 
 @IonicPage()
@@ -14,6 +15,10 @@ export class TeamDetailPage {
   team : any;
   tourneyData : any;
   games : any;
+  teamStanding : any;
+  dateFilter : string;
+  allGames : any[];
+  useDateFilter : boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -45,6 +50,10 @@ export class TeamDetailPage {
                    }
                  })
                  .value();
+      
+      this.allGames = this.games;
+      // this.teamStanding = _.find(this.tourneyData.standings, {'teamId' : this.team.id });
+      console.log('**team standings',this.teamStanding);
     
     console.log('**Games',this.games);
   }
@@ -70,5 +79,14 @@ export class TeamDetailPage {
   itemTapped(game : any){
     let sourceGame = this.tourneyData.games.find( g => g.id === game.gameId)
     this.navCtrl.push(GamePage, sourceGame);
+  }
+
+  dateChanged(){
+    if(this.useDateFilter){
+      this.games = _.filter( this.allGames, g => moment(g.time).isSame(this.dateFilter,'day'));
+    }
+    else{
+      this.games = this.allGames;
+    }
   }
 }
