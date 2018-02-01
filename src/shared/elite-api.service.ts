@@ -11,6 +11,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 export class EliteApiService{
 
     currentTourney : any;
+    private tourneyData = {};
     private baseUrl = 'https://elite-schedule-app-i2-8c43a.firebaseio.com/';
 
     constructor( private _http : HttpClient){}
@@ -21,11 +22,17 @@ export class EliteApiService{
         .catch( this.handleError);
     }
 
-    getTournamentTeamsById(tourneyId : any) : Observable<any>{
+    getTournamentTeamsById(tourneyId : any, forceRefresh : boolean = false) : Observable<any>{
+
+        if( !forceRefresh && this.tourneyData[tourneyId] ){
+            this.currentTourney = this.tourneyData[tourneyId];
+            return Observable.of(this.currentTourney);
+        }
         return this._http.get<any>(`${this.baseUrl}/tournaments-data/${tourneyId}.json`)
         ._do(data => console.log( 'Response Data',JSON.stringify(data)))
         .map( (resp: Response) =>{
-            this.currentTourney = resp;
+            this.tourneyData[tourneyId] = resp;
+            this.currentTourney = this.tourneyData[tourneyId];
             return this.currentTourney;
         })
         .catch( this.handleError);
@@ -40,5 +47,9 @@ export class EliteApiService{
     handleError(err : HttpErrorResponse){
         console.log( err.message);
         return Observable.throw( err.message);
+    }
+
+    refreshCurrentToureny(){
+        return this.getTournamentTeamsById(this.currentTourney.tournament.id, true);
     }
 }

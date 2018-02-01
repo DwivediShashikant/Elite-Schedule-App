@@ -36,10 +36,6 @@ export class MyTeamsPage {
   }
 
   ionViewDidEnter(){
-    let favourite = this._userSetting.getAllFavourites();
-    console.log(favourite);
-    for(let i=0;i<favourite.length - 6;i++){
-      this.favourites.push(JSON.parse(favourite[i]));
-    }
+   this.favourites=  this._userSetting.getAllFavourites(); 
   }
 }

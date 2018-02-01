@@ -9,6 +9,10 @@
 
 
 <ion-content>
+  <ion-toolbar>
+    <ion-searchbar placeholder = 'Search Team' [(ngModel)] = 'queryText'
+    (ionInput) = 'filterTeams()'></ion-searchbar>
+  </ion-toolbar>
    <ion-list>
      <ion-item-group *ngFor = 'let division of teams'>
        <ion-item-divider color ='secondary'>{{division.divisionName}}</ion-item-divider>

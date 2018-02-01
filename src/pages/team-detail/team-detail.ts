@@ -143,4 +143,11 @@ export class TeamDetailPage {
         this.tourneyData.tournament.name);
     }
   }
+
+  refreshAll(refresher){
+    this._eliteApi.refreshCurrentToureny().subscribe( () => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    })
+  }
 }

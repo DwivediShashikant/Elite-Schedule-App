@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { TeamHomePage } from '../pages';
 import { EliteApiService } from '../../shared/shared';
 import * as _ from 'lodash' 
+import { filter } from 'rxjs/operators/filter';
+import { filterQueryId } from '@angular/core/src/view/util';
 
 @IonicPage()
 @Component({
@@ -15,6 +17,7 @@ export class TeamsPage {
   tourneyId : any;
   allTeam : any;
   allTeamDivisions : any;
+  queryText : string;
 
   constructor(
     public navCtrl: NavController, 
@@ -44,7 +47,7 @@ export class TeamsPage {
                                  .value();
         
         this.teams = this.allTeamDivisions;
-        console.log(this.teams);
+        console.log('##All division Team',this.teams);
       });
       loader.dismiss();
 
@@ -54,5 +57,18 @@ export class TeamsPage {
  
   itemTapped(team){
     this.navCtrl.push(TeamHomePage,team);
+  }
+  filterTeams(){
+    let queryTextLower = this.queryText.toLowerCase();
+    let filterTeams = [];
+    this.allTeamDivisions.forEach(division => {
+      console.log('hey',division);
+      let team = division.divisionTeam.filter( t => t.name.toLowerCase().includes(queryTextLower));
+      if(team.length !== 0){
+        filterTeams.push( { divisionName : division.divisionName, divisionTeam : team } );
+      }
+    });
+     console.log('############',filterTeams);
+     this.teams = filterTeams;
   }
 }
