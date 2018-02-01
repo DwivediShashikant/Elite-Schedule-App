@@ -21,27 +21,28 @@
       <ion-item>
         <ion-label>Date Filter:</ion-label>
         <ion-toggle [(ngModel)] = 'useDateFilter' (ionChange) = 'dateChanged()'></ion-toggle>
-        <ion-datetime displayFormat = 'M/D/YYYY' pickerFormat = 'M/D/YYYY' [disabled] = '!useDateFilter'
+        <ion-datetime displayFormat = 'M/D/YYYY' pickerFormat = 'M/D/YYYY' [(disabled)] = '!useDateFilter'
         [(ngModel)] = 'dateFilter' (ionChange) = 'dateChanged()'></ion-datetime>
       </ion-item>
 
     </ion-card-content>
   </ion-card>
 
-  <ion-list>
+  <ion-list full>
     <ion-item *ngFor = 'let game of games'>
         <ion-row >
-            <ion-col col-4>
-              <p>{{game.time | date : 'M/d/yy'}}</p>
-              <p>{{game.time | date : shortTime}}</p>
+            <ion-col col-2.5>
+              <p class = 'small'>{{game.time | date : 'M/d/yy'}}</p>
+              <p class = 'xSmall' >{{game.time | date : 'shortTime'}}</p>
             </ion-col>
-            <ion-col col-4 >
-                <p>{{game.homeAway}} {{game.opponent}}</p>
-                <p>{{game.location}}</p>
+            <ion-col col-7>
+                <p class = 'small'>{{game.homeAway}} {{game.opponent}}</p>
+                <p class='xSmall'>{{game.location}}</p>
             </ion-col>
-            <ion-col col-4 >
-              <h4>{{game.scoreDisplay}}</h4>
-            </ion-col>
+              <ion-col col-2 >
+                <ion-badge [color] = 'gameResultColor(game)' >{{getScoreWorL(game)}}</ion-badge>
+                <p class="xSmall">{{game.scoreDisplay}}<p>
+              </ion-col>
           </ion-row>
     </ion-item>
   </ion-list>

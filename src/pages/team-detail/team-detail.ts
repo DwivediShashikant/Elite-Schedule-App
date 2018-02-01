@@ -71,7 +71,7 @@ export class TeamDetailPage {
     }
   }
 
-  
+
   goHome(){
     console.log('**navCtrl-Parent',this.navCtrl.parent);
     this.navCtrl.parent.parent.popToRoot();
@@ -89,5 +89,11 @@ export class TeamDetailPage {
     else{
       this.games = this.allGames;
     }
+  }
+  getScoreWorL(game: any){
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
+  }
+  gameResultColor(game: any){
+    return game.scoreDisplay[0]=== 'W' ? 'primary' : 'danger';
   }
 }
