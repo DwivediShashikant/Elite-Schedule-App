@@ -71,6 +71,7 @@ export class TeamDetailPage {
     }
   }
 
+  
   goHome(){
     console.log('**navCtrl-Parent',this.navCtrl.parent);
     this.navCtrl.parent.parent.popToRoot();
