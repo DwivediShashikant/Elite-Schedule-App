@@ -1,10 +1,14 @@
 page-team-detail {
 
-    .xSmall{
+    .xxSmall{
         font-size : xx-small;
     }
     .small{
-        font-size: 10.5px;
+        font-size: small;
         font-weight: bold;
+    }
+
+    .noPadding{
+        padding: 0px !important;
     }
 }

@@ -8,14 +8,24 @@
 
 
 <ion-content >
-  <ion-card>
-    <ion-card-content>
+  <ion-card class = 'noPadding'>
+    <ion-card-content class="noPadding">
       <ion-row>
-        <ion-col col-12>
-          <!-- <h2>Recored {{teamStanding.wins}}--{{teamStanding.losses}}</h2> -->
-          <p>Coach : {{team.coach}}</p>
+
+        <ion-col col-5>          <!-- <h2>Recored {{teamStanding.wins}}--{{teamStanding.losses}}</h2> -->
+          <p>Record</p>
+          <p class="xxSmall">Coach : {{team.coach}}</p>
         </ion-col>
-        <ion-col></ion-col>
+
+        <ion-col col-7>
+          <button outline ion-button icon-let *ngIf = '!isFavourite' (click) = 'toggleFavourite()'>
+            <ion-icon name ='star'></ion-icon>
+            Add Favourite
+          </button>
+          <button ion-button icon-let *ngIf = 'isFavourite' (click) = 'toggleFavourite()' >
+              <ion-icon name ='star'></ion-icon>
+            </button>
+        </ion-col>
       </ion-row>
       
       <ion-item>
@@ -31,17 +41,17 @@
   <ion-list full>
     <ion-item *ngFor = 'let game of games'>
         <ion-row >
-            <ion-col col-2.5>
+            <ion-col col-3>
               <p class = 'small'>{{game.time | date : 'M/d/yy'}}</p>
-              <p class = 'xSmall' >{{game.time | date : 'shortTime'}}</p>
+              <p class = 'xxSmall' >{{game.time | date : 'shortTime'}}</p>
             </ion-col>
             <ion-col col-7>
                 <p class = 'small'>{{game.homeAway}} {{game.opponent}}</p>
-                <p class='xSmall'>{{game.location}}</p>
+                <p class='xxSmall'>{{game.location}}</p>
             </ion-col>
               <ion-col col-2 >
                 <ion-badge [color] = 'gameResultColor(game)' >{{getScoreWorL(game)}}</ion-badge>
-                <p class="xSmall">{{game.scoreDisplay}}<p>
+                <p class="xxSmall">{{game.scoreDisplay}}<p>
               </ion-col>
           </ion-row>
     </ion-item>

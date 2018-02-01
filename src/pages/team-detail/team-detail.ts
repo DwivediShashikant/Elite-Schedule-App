@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { MyTeamsPage, GamePage } from '../pages';
 import * as _ from 'lodash'
 import * as moment from 'moment'
@@ -19,10 +19,13 @@ export class TeamDetailPage {
   dateFilter : string;
   allGames : any[];
   useDateFilter : boolean = false;
+  isFavourite : boolean = false;
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams, private _eliteApi : EliteApiService ) {
+    public navParams: NavParams, 
+    private _eliteApi : EliteApiService, 
+    private _alertController : AlertController ) {
 
     this.team = this.navParams.data;
     console.log(`**Nav-Params`);
@@ -93,7 +96,33 @@ export class TeamDetailPage {
   getScoreWorL(game: any){
     return game.scoreDisplay ? game.scoreDisplay[0] : '';
   }
+
   gameResultColor(game: any){
     return game.scoreDisplay[0]=== 'W' ? 'primary' : 'danger';
+  }
+
+  toggleFavourite(){
+    this.isFavourite = this.isFavourite === true ? false : true;
+
+    if(this.isFavourite === false){
+      let alert = this._alertController.create({
+        title : 'Unfollow ?',
+        message : 'Are you Sure ?',
+        buttons :[{
+          text : 'yes',
+          handler : () => {
+            // TODO on yes
+          }
+        },{
+          text : 'no',
+          handler : () => {
+            this.isFavourite = true;
+            //TODO on no
+          }
+        }
+        ]
+      });
+      alert.present();
+    }
   }
 }
