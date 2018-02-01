@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { MyTeamsPage, GamePage } from '../pages';
 import * as _ from 'lodash'
 import * as moment from 'moment'
 import { EliteApiService } from '../../shared/shared';
+import { duration } from 'moment';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,8 @@ export class TeamDetailPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private _eliteApi : EliteApiService, 
-    private _alertController : AlertController ) {
+    private _alertController : AlertController, 
+    private _toast : ToastController ) {
 
     this.team = this.navParams.data;
     console.log(`**Nav-Params`);
@@ -107,11 +109,17 @@ export class TeamDetailPage {
     if(this.isFavourite === false){
       let alert = this._alertController.create({
         title : 'Unfollow ?',
-        message : 'Are you Sure ?',
+        message : 'Are you Sure, you want to unfollow this team ?',
         buttons :[{
           text : 'yes',
           handler : () => {
             // TODO on yes
+            let toast = this._toast.create({
+              message : 'Successfully Unfollwed',
+              duration : 2000,
+              position : 'bottom'
+            });
+            toast.present();
           }
         },{
           text : 'no',
