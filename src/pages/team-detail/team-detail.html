@@ -42,7 +42,7 @@
   </ion-card>
 
   <ion-list full>
-    <ion-item *ngFor = 'let game of games'>
+    <ion-item *ngFor = 'let game of games' (click) = 'itemTapped(game)'>
         <ion-row >
             <ion-col col-3>
               <p class = 'small'>{{game.time | date : 'M/d/yy'}}</p>
